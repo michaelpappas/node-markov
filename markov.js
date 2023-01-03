@@ -26,22 +26,40 @@ class MarkovMachine {
    *
    * */
 
+  // getChains() {
+  //   // TODO: implement this!
+  //   let chains = {};
+  //   for(let i=0; i<this.words.length; i++){
+  //     let word = this.words[i];
+  //     let nextWord = this.words[i+1] || null;
+  //     if (word in chains){
+  //       chains[word].push(nextWord)
+
+  //     }
+  //     else{
+  //       chains[word] = [nextWord || null]
+  //     }
+  //   }
+  //   console.log('chains',chains);
+  //   return chains
+  // }
+
   getChains() {
-    // TODO: implement this!
-    let chains = {};
+    let chains = new Map();
     for(let i=0; i<this.words.length; i++){
       let word = this.words[i];
       let nextWord = this.words[i+1] || null;
-      if (word in chains){
-        chains[word].push(nextWord)
+      if (chains.has(word)){
+        chains.get(word).push(nextWord);
       }
       else{
-        chains[this.words[i]] = [this.words[i+1] || null]
+        chains.set(word, [nextWord]);
       }
     }
-    console.log(chains)
     return chains
   }
+
+
 
 
   /** Return random text from chains, starting at the first word and continuing
