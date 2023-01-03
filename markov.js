@@ -15,7 +15,7 @@ class MarkovMachine {
   /** Get markov chain: returns Map of Markov chains.
    *
    *  For text of "The cat in the hat.", chains will be:
-   * 
+   *
    *  {
    *   "The": ["cat"],
    *   "cat": ["in"],
@@ -23,11 +23,24 @@ class MarkovMachine {
    *   "the": ["hat."],
    *   "hat.": [null],
    *  }
-   * 
+   *
    * */
 
   getChains() {
     // TODO: implement this!
+    let chains = {};
+    for(let i=0; i<this.words.length; i++){
+      let word = this.words[i];
+      let nextWord = this.words[i+1] || null;
+      if (word in chains){
+        chains[word].push(nextWord)
+      }
+      else{
+        chains[this.words[i]] = [this.words[i+1] || null]
+      }
+    }
+    console.log(chains)
+    return chains
   }
 
 
@@ -42,3 +55,6 @@ class MarkovMachine {
     // - repeat until reaching the terminal null
   }
 }
+
+let cat = new MarkovMachine("The cat is in the hat. The cat is the cat. The hat is a cat.")
+
