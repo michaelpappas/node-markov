@@ -71,8 +71,21 @@ class MarkovMachine {
     // - start at the first word in the input text
     // - find a random word from the following-words of that
     // - repeat until reaching the terminal null
+    let word = this.words[0];
+    let sentence = "";
+
+    while (word != null){
+      sentence += " ";
+      sentence += word;
+      let randomIdx = Math.floor(Math.random() * this.chains.get(word).length);
+      word = this.chains.get(word)[randomIdx];
+    }
+    console.log(sentence);
+    return sentence
   }
 }
 
-let cat = new MarkovMachine("The cat is in the hat. The cat is the cat. The hat is a cat.")
-
+// let cat = new MarkovMachine("The cat is in the hat. The cat is the cat. The hat is a cat.");
+// cat.getText();
+// let tacos = new MarkovMachine("I like tacos in the morning. I like pizza in the morning");
+// tacos.getText();
