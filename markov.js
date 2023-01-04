@@ -1,5 +1,5 @@
 /** Textual markov chain generator. */
-
+"use strict";
 
 class MarkovMachine {
 
@@ -26,24 +26,6 @@ class MarkovMachine {
    *
    * */
 
-  // getChains() {
-  //   // TODO: implement this!
-  //   let chains = {};
-  //   for(let i=0; i<this.words.length; i++){
-  //     let word = this.words[i];
-  //     let nextWord = this.words[i+1] || null;
-  //     if (word in chains){
-  //       chains[word].push(nextWord)
-
-  //     }
-  //     else{
-  //       chains[word] = [nextWord || null]
-  //     }
-  //   }
-  //   console.log('chains',chains);
-  //   return chains
-  // }
-
   getChains() {
     let chains = new Map();
     for(let i=0; i<this.words.length; i++){
@@ -66,26 +48,19 @@ class MarkovMachine {
    *  until it hits a null choice. */
 
   getText() {
-    // TODO: implement this!
-
-    // - start at the first word in the input text
-    // - find a random word from the following-words of that
-    // - repeat until reaching the terminal null
     let word = this.words[0];
     let sentence = "";
 
     while (word != null){
-      sentence += " ";
       sentence += word;
+      sentence += " ";
       let randomIdx = Math.floor(Math.random() * this.chains.get(word).length);
       word = this.chains.get(word)[randomIdx];
     }
     console.log(sentence);
-    return sentence
+    return sentence.trim()
   }
 }
 
-// let cat = new MarkovMachine("The cat is in the hat. The cat is the cat. The hat is a cat.");
-// cat.getText();
-// let tacos = new MarkovMachine("I like tacos in the morning. I like pizza in the morning");
-// tacos.getText();
+module.exports = { MarkovMachine };
+
